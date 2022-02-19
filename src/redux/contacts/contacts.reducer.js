@@ -2,6 +2,7 @@ import { GET_CONTACTS, GET_CONTACT, ADD_CONTACT, DELETE_CONTACT, ADD_CONTACT_FAI
 
 const INITIAL_STATE = {
   contacts: [],
+  totalPages: 0,
   broadcasts: [],
   isLoading: true
 };
@@ -14,7 +15,8 @@ const contactsReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isLoading: false,
-        contacts: action.payload
+        contacts: action.payload,
+        totalPages: action.payload.totalPages,
       };
 
     case GET_CONTACT:

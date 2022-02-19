@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import ReactLoading from "react-loading";
-import { Row, Col, Button, Toast, ToastBody, ToastHeader, TabContent, Nav, NavItem, NavLink } from 'reactstrap';
+import { Row, Col, Button, TabContent, Nav, NavItem, NavLink, Alert } from 'reactstrap';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-
 import CreateCategory from '../categories/CreateCategory';
 import CategoriesTabPane from '../categories/CategoriesTabPane';
 import QuizesTabPane from '../quizes/QuizesTabPane';
@@ -16,7 +15,8 @@ import ScoresTabPane from './ScoresTabPane';
 import ScoresTabPaneCreator from './ScoresTabPaneCreator';
 import DownloadsTabPaneCreator from './DownloadsTabPaneCreator';
 import DownloadsTabPane from './DownloadsTabPane';
-import BroadcastModal from './BroadcastModal';
+import BroadcastModal from './BroadcastModal'
+import dashimg from '../../images/dashboard.svg';
 
 const Webmaster = ({ auth, categories }) => {
     // State
@@ -31,16 +31,25 @@ const Webmaster = ({ auth, categories }) => {
 
             auth.user.role !== 'Visitor' ?
                 <>
-                    <Row className="m-4 d-flex justify-content-between align-items-start text-primary">
-                        <Toast>
-                            <ToastHeader>
-                                <strong>Welcome to your webmaster page</strong>
-                            </ToastHeader>
+                    <Row className="m-lg-4 px-lg-5 d-flex justify-content-between align-items-center text-primary">
 
-                            <ToastBody>
-                                Here you can add, edit and remove features!
-                            </ToastBody>
-                        </Toast>
+                        <div className="dashboard-img">
+                            <img src={dashimg} alt="dashimg" />
+                        </div>
+                        <div className='text-center'>
+                            <Alert className='border border-warning'>
+                                <h4 className="alert-heading">
+                                    <strong>{auth.user && auth.user.name}</strong>
+                                </h4>
+                                <p>
+                                    <strong>Welcome to the {auth.user && auth.user.role} dashboard page</strong>
+                                </p>
+                                <hr />
+                                <p className="mb-0">
+                                    Here you can add, edit and remove features, cheers!!
+                                </p>
+                            </Alert>
+                        </div>
 
                         <div className="master-btns">
 
@@ -61,16 +70,15 @@ const Webmaster = ({ auth, categories }) => {
 
                     </Row>
 
-                    <Row className="m-4">
-                        <Col sm="12" className="px-0">
+                    <Row className="m-lg-5">
+                        <Col sm="12" className="px-0 d-flex justify-content-around">
 
-                            <Nav tabs className="d-block d-sm-flex mb-0 mb-lg-5">
-
+                            <Nav tabs className="webmaster-navbar d-block d-sm-flex mb-0 mb-lg-5 p-2 border rounded border-success bg-light text-uppercase font-weight-bolder">
                                 <NavItem>
                                     <NavLink
                                         className={classnames({ active: activeTab === '1' })}
                                         onClick={() => { toggle('1'); }}>
-                                        Categories
+                                        <u>Categories</u>
                                     </NavLink>
                                 </NavItem>
 
@@ -78,7 +86,7 @@ const Webmaster = ({ auth, categories }) => {
                                     <NavLink
                                         className={classnames({ active: activeTab === '2' })}
                                         onClick={() => { toggle('2'); }}>
-                                        Quizes
+                                        <u>Quizes</u>
                                     </NavLink>
                                 </NavItem>
 
@@ -86,7 +94,7 @@ const Webmaster = ({ auth, categories }) => {
                                     <NavLink
                                         className={classnames({ active: activeTab === '6' })}
                                         onClick={() => { toggle('6'); }}>
-                                        All scores
+                                        <u>All scores</u>
                                     </NavLink>
                                 </NavItem>
 
@@ -94,7 +102,7 @@ const Webmaster = ({ auth, categories }) => {
                                     <NavLink
                                         className={classnames({ active: activeTab === '7' })}
                                         onClick={() => { toggle('7'); }}>
-                                        Downloads
+                                        <u>Downloads</u>
                                     </NavLink>
                                 </NavItem>
 
@@ -105,7 +113,7 @@ const Webmaster = ({ auth, categories }) => {
                                                 <NavLink
                                                     className={classnames({ active: activeTab === '3' })}
                                                     onClick={() => { toggle('3'); }}>
-                                                    Subscribers
+                                                    <u>Subscribers</u>
                                                 </NavLink>
                                             </NavItem>
 
@@ -113,7 +121,7 @@ const Webmaster = ({ auth, categories }) => {
                                                 <NavLink
                                                     className={classnames({ active: activeTab === '4' })}
                                                     onClick={() => { toggle('4'); }}>
-                                                    Users
+                                                    <u>Users</u>
                                                 </NavLink>
                                             </NavItem>
 
@@ -121,7 +129,7 @@ const Webmaster = ({ auth, categories }) => {
                                                 <NavLink
                                                     className={classnames({ active: activeTab === '5' })}
                                                     onClick={() => { toggle('5'); }}>
-                                                    Contacts
+                                                    <u>Contacts</u>
                                                 </NavLink>
                                             </NavItem>
                                         </> : null

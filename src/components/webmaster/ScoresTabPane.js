@@ -6,6 +6,7 @@ import { setScores, deleteScore } from '../../redux/scores/scores.actions'
 import ReactLoading from "react-loading";
 import trash from '../../images/trash.svg';
 import Pagination from './Pagination';
+import PageOf from './PageOf';
 
 const ScoresTabPane = ({ scores, setScores, deleteScore }) => {
 
@@ -24,24 +25,23 @@ const ScoresTabPane = ({ scores, setScores, deleteScore }) => {
 
             {
                 scores.isLoading ?
-                    <ReactLoading type="spinningBubbles" color="#33FFFC" /> :
-                    <>
-                        <p className="text-right my-2">
-                            Page <strong>{pageNo}</strong> of <strong>{numberOfPages}</strong>
-                        </p>
+                    <div className="d-flex justify-content-center align-items-center" style={{ height: "40vh" }}>
+                        <ReactLoading type="spinningBubbles" color="#33FFFC" />
+                    </div> :
 
                         <Row>
-                            <Table size="sm" className="all-scores" hover responsive>
-                                <thead>
+                        <PageOf pageNo={pageNo} numberOfPages={numberOfPages} />
+                        <Table bordered className='all-scores table-success' hover responsive striped size="sm">
+                            <thead className='text-uppercase table-dark'>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Date</th>
-                                        <th>Taker</th>
-                                        <th>Quiz</th>
-                                        <th>Category</th>
-                                        <th>Marks</th>
-                                        <th>Out of</th>
-                                        <th><img src={trash} alt="" width="16" height="16" /></th>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Taker</th>
+                                        <th scope="col">Quiz</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Marks</th>
+                                        <th scope="col">Out of</th>
+                                    <th scope="col">❌</th>
                                     </tr>
                                 </thead>
 
@@ -50,9 +50,11 @@ const ScoresTabPane = ({ scores, setScores, deleteScore }) => {
                                     {scores && scores.allScores.map((score, index) => (
 
                                         <tr key={index}>
-                                            <th scope="row">{((pageNo - 1) * 20) + index + 1}</th>
+                                            <th scope="row" className="table-dark">{((pageNo - 1) * 20) + index + 1}</th>
                                             <td>{score.test_date.split('T').slice(0, 1)}</td>
-                                            <td>{score.taken_by && score.taken_by.name}</td>
+                                            <td className='text-uppercase'>
+                                                {score.taken_by && score.taken_by.name}
+                                                </td>
                                             <td>{score.quiz && score.quiz.title}</td>
                                             <td>{score.category && score.category.title}</td>
                                             <td className={
@@ -66,7 +68,7 @@ const ScoresTabPane = ({ scores, setScores, deleteScore }) => {
                                             <td className={score.out_of / 2 > score.marks ? "font-weight-bold text-danger" : "text-success"}>
                                                 {score.out_of}
                                             </td>
-                                            <td>
+                                            <td className="table-dark">
                                                 <Button size="sm" color="link" className="mt-0 p-0" onClick={() => deleteScore(score._id)}>
                                                     <img src={trash} alt="" width="16" height="16" />
                                                 </Button>
@@ -85,8 +87,7 @@ const ScoresTabPane = ({ scores, setScores, deleteScore }) => {
                                     </Button>
                                 </Link>
                             </div>
-                        </Row>
-                    </>}
+                        </Row>}
         </TabPane>
     )
 }

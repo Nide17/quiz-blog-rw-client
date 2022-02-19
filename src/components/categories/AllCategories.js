@@ -84,10 +84,10 @@ const AllCategories = ({ categories, quizes, setQuizes }) => {
                                         </ToastHeader>
 
                                         <ToastBody>
-                                            <p className="font-weight-bold mb-0">
-                                                This category contains <span className="text-danger">{category.quizes.length}</span> quizzes</p>
-                                            <small className="text-center text-info">
-                                                <i>{category.description}</i>
+                                            <p className="mb-0">
+                                                This category contains <span className="font-weight-bold">{category.quizes.length}</span> quizzes</p>
+                                            <small className="text-center">
+                                                <b>{category.description}</b>
                                             </small>
 
                                             <p className="font-weight-bold mt-2">Quizzes ({category.quizes.length})</p>
@@ -101,7 +101,7 @@ const AllCategories = ({ categories, quizes, setQuizes }) => {
                                                         <Link to={`/view-quiz/${quiz._id}`}>
                                                             {quiz.title}
                                                         </Link>
-                                                        <strong className="text-danger">&nbsp;
+                                                        <strong className="text-warning">&nbsp;
                                                             ({quiz.questions.length} questions)</strong>
                                                     </li>
                                                 )}

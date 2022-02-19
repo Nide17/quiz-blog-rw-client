@@ -1,14 +1,21 @@
+node_modules
+src/setupTests.js
+src/App.test.js
+.eslintcache
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
 /node_modules
+/client/node_modules
+/.pnp
+.pnp.js
 /.vscode
 
 # testing
 /coverage
 
 # production
-/build
+/client/build
 
 # misc
 .DS_Store
@@ -16,6 +23,9 @@
 .env.development.local
 .env.test.local
 .env.production.local
+/config
+/config/default.json
+/config/default copy.json
 
 npm-debug.log*
 yarn-debug.log*
@@ -25,6 +35,10 @@ yarn-error.log*
 * copy.js
 * copy.json
 * copy.md
-.eslintcache
-setupTests.js
-App.test.js
+
+
+/client/src/components/questions/* copy.js
+/client/src/components/questions/* copy 1.js
+/client/src/components/questions/* cop 2.js
+/client/src/components/questions/* copy 3.js
+/client/src/components/questions/* copy 4.js

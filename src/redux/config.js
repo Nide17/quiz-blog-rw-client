@@ -1,1 +1,1 @@
-export const apiURL = 'http://localhost:4000/' || 'https://quiz-blog-rw.herokuapp.com/'
+export const apiURL = 'https://quiz-blog-rw.herokuapp.com/'

@@ -12,18 +12,17 @@ const axiosInstance = axios.create({
 
 // dispatch(action)
 // Dispatches an action. This is the only way to trigger a state change.
-export const getContacts = () => async (dispatch, getState) => {
+export const getContacts = (pageNo) => async (dispatch, getState) => {
   await dispatch(setContactsLoading());
 
   try {
     await axiosInstance
-      .get('/api/contacts', tokenConfig(getState))
+      .get(`/api/contacts?pageNo=${pageNo}`, tokenConfig(getState))
       .then(res =>
         dispatch({
           type: GET_CONTACTS,
           payload: res.data,
-        }),
-      )
+        }))
   } catch (err) {
     dispatch(returnErrors(err.response.data, err.response.status))
   }

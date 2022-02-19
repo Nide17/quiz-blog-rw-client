@@ -23,22 +23,24 @@ const ScoresTabPaneCreator = ({ auth, getCreatorScores, scores, deleteScore }) =
 
             {
                 scores.isLoading ?
-                    <ReactLoading type="spinningBubbles" color="#33FFFC" /> :
+                    <div className="d-flex justify-content-center align-items-center" style={{ height: "40vh" }}>
+                        <ReactLoading type="spinningBubbles" color="#33FFFC" />
+                    </div> :
 
                     <Row>
 
                         {scores && scores.creatorScores.length > 0 ?
-                            <Table size="sm" className="all-scores" hover responsive>
-                                <thead>
+                            <Table bordered className='all-scores table-success' hover responsive striped size="sm">
+                                <thead className='text-uppercase table-dark'>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Date</th>
-                                        <th>Taker</th>
-                                        <th>Quiz</th>
-                                        <th>Category</th>
-                                        <th>Marks</th>
-                                        <th>Out of</th>
-                                        <th><img src={trash} alt="" width="16" height="16" /></th>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Taker</th>
+                                        <th scope="col">Quiz</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Marks</th>
+                                        <th scope="col">Out of</th>
+                                        <th scope="col">❌</th>
                                     </tr>
                                 </thead>
 
@@ -47,9 +49,9 @@ const ScoresTabPaneCreator = ({ auth, getCreatorScores, scores, deleteScore }) =
                                     {cScores && cScores.map((score, index) => (
 
                                         <tr key={index}>
-                                            <th scope="row">{index + 1}</th>
+                                            <th scope="row" className="table-dark">{index + 1}</th>
                                             <td>{score.test_date.split('T').slice(0, 1)}</td>
-                                            <td>{score && score.users_scores_name}</td>
+                                            <td className='text-uppercase'>{score && score.users_scores_name}</td>
                                             <td>{score && score.quiz_scores_title}</td>
                                             <td>{score && score.category_scores_title}</td>
                                             <td className={
@@ -63,7 +65,7 @@ const ScoresTabPaneCreator = ({ auth, getCreatorScores, scores, deleteScore }) =
                                             <td className={score.out_of / 2 > score.marks ? "font-weight-bold text-danger" : "text-success"}>
                                                 {score.out_of}
                                             </td>
-                                            <td>
+                                            <td className="table-dark">
                                                 <Button size="sm" color="link" className="mt-0 p-0" onClick={() => deleteScore(score._id)}>
                                                     <img src={trash} alt="" width="16" height="16" />
                                                 </Button>

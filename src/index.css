@@ -288,6 +288,28 @@ a.blink_me:hover {
     text-decoration: none;
 }
 
+ul.webmaster-navbar {
+    background-color: #e7f1ed !important;
+}
+
+.dashboard-img img {
+    max-width: 100%;
+    height: 140px;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);
+    border-radius: 5px !important;
+}
+
+.nav-tabs a.nav-link {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+}
+
+.nav-tabs a.nav-link.active {
+    color: #157A6E !important;
+    background-color: #fff !important;
+    border-color: #dee2e6 #bdf5d5 #fff !important;
+}
+
 .answer-option.btn.btn-outline-info {
     transition: all .5s ease;
 }

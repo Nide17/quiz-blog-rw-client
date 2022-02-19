@@ -15,7 +15,9 @@ const CategoriesTabPane = ({ auth, categories, deleteCategory }) => {
         <TabPane tabId="1">
 
         {categories.isLoading ? 
-        <ReactLoading type="spinningBubbles" color="#33FFFC" />:
+                <div className="d-flex justify-content-center align-items-center" style={{ height: "40vh" }}>
+                    <ReactLoading type="spinningBubbles" color="#33FFFC" />
+                </div>:
             <Row>
                 {categories.allcategories && categories.allcategories.map(category => (
 

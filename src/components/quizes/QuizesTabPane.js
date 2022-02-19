@@ -37,11 +37,14 @@ const QuizesTabPane = ({ auth, quizes, questionsData, setQuizes, setQuestions, d
         <TabPane tabId="2">
 
             {quizes.isLoading ?
-                <ReactLoading type="spinningBubbles" color="#33FFFC" /> :
+            
+                <div className="d-flex justify-content-center align-items-center" style={{ height: "40vh" }}>
+                    <ReactLoading type="spinningBubbles" color="#33FFFC" />
+                </div> :
 
                 quizzesToUse && quizzesToUse.length > 0 ?
                     <>
-                        <Row className="mt-2">
+                        <Row className="mt-0">
                             <Col sm="6">
                                 <SearchInput setSearchKey={setSearchKey} placeholder=" Search quizes here ...  " />
                             </Col>

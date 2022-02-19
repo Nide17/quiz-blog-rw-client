@@ -19,20 +19,22 @@ const DownloadsTabPaneCreator = ({ auth, downloads, getCreatorDownloads, deleteD
         <TabPane tabId="7">
 
             {downloads.isLoading ?
-                <ReactLoading type="spinningBubbles" color="#33FFFC" /> :
+                <div className="d-flex justify-content-center align-items-center" style={{ height: "40vh" }}>
+                    <ReactLoading type="spinningBubbles" color="#33FFFC" />
+                </div> :
                 <Row>
 
                     {cDownloads && cDownloads.length > 0 ?
-                        <Table size="sm" className="all-scores" hover responsive>
-                            <thead>
+                        <Table bordered className='all-scores table-success' hover responsive striped size="sm">
+                            <thead className='text-uppercase table-dark'>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Date</th>
-                                    <th>User</th>
-                                    <th>File</th>
-                                    <th>Chapter</th>
-                                    <th>Course</th>
-                                    <th>Action</th>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">User</th>
+                                    <th scope="col">File</th>
+                                    <th scope="col">Chapter</th>
+                                    <th scope="col">Course</th>
+                                    <th scope="col">❌</th>
                                 </tr>
                             </thead>
 
@@ -40,13 +42,15 @@ const DownloadsTabPaneCreator = ({ auth, downloads, getCreatorDownloads, deleteD
                                 {cDownloads && cDownloads.map((download, index) =>
 
                                     <tr key={index}>
-                                        <th scope="row">{index + 1}</th>
+                                        <th scope="row" className="table-dark">{index + 1}</th>
                                         <td>{download && download.updatedAt.split('T').slice(0, 1)}</td>
-                                        <td>{download && download.users_downloads_name}</td>
+                                        <td className='text-uppercase'>
+                                            {download && download.users_downloads_name}
+                                        </td>
                                         <td>{download && download.notes_downloads_title}</td>
                                         <td>{download && download.chapters_downloads_title}</td>
                                         <td>{download && download.courses_downloads_title}</td>
-                                        <td>
+                                        <td className="table-dark">
                                             <Button size="sm" color="link" className="mt-0 p-0" onClick={() => deleteDownload(download._id)}>
                                                 <img src={trash} alt="" width="16" height="16" />
                                             </Button>

@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
-import { Row, Col, Card, Button, CardTitle, CardText, TabPane } from 'reactstrap';
+import { Row, Button, TabPane, Table } from 'reactstrap';
 import { connect } from 'react-redux'
 import { setSubscribers, deleteSubscriber } from '../../redux/subscribers/subscribers.actions'
 import ReactLoading from "react-loading";
-
 import trash from '../../images/trash.svg';
 
 const SubscribersTabPane = ({ subscribedUsers, setSubscribers, deleteSubscriber }) => {
@@ -15,33 +14,38 @@ const SubscribersTabPane = ({ subscribedUsers, setSubscribers, deleteSubscriber 
 
     return (
 
-        <TabPane tabId="3">
+        <TabPane tabId="3" className='mx-4'>
             {
                 subscribedUsers.isLoading ?
                     <ReactLoading type="spinningBubbles" color="#33FFFC" /> :
                     <Row>
-                        {subscribedUsers && subscribedUsers.subscribedUsers.map(subscribedUser => (
-                            <Col sm="3" key={subscribedUser.email} className="mt-3">
-
-                                <Card body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
-
-                                    <CardTitle tag="div" className="d-flex justify-content-between">
-                                        <p className="mb-0">{subscribedUser.name.split(' ').slice(0, 2).join(' ')}</p>
-                                        <Button size="sm" color="link" className="mt-0 p-0 d-none" onClick={() => deleteSubscriber(subscribedUser._id)}>
-                                            <img src={trash} alt="" width="16" height="16" />
-                                        </Button>
-                                    </CardTitle>
-
-                                    <CardText>
-                                        <small>Email: {subscribedUser.email}</small>
-                                    </CardText>
-                                    <Button>
-                                        <small><i>On {subscribedUser.subscription_date.split('T').slice(0, 2).join(' at ')}</i></small>
-                                    </Button>
-                                </Card>
-
-                            </Col>
-                        ))}
+                        <Table bordered className='table-success' hover responsive striped size="sm">
+                            <thead className='text-uppercase table-dark'>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Subscription Date</th>
+                                    <th scope="col">❌</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {subscribedUsers && subscribedUsers.subscribedUsers.map((subscribedUser, index) => (
+                                    <tr key={subscribedUser._id}>
+                                        <th scope="row" className="table-dark">{index + 1}</th>
+                                        <td className='text-uppercase'>
+                                            {subscribedUser.name.split(' ').slice(0, 2).join(' ')}
+                                            </td>
+                                        <td className='text-lowercase'>{subscribedUser.email}</td>
+                                        <td>{subscribedUser.subscription_date.split('T').slice(0, 2).join(' at ')}</td>
+                                        <td className="table-dark">
+                                            <Button size="sm" color="link" className="mt-0 p-0" onClick={() => deleteSubscriber(subscribedUser._id)}>
+                                                <img src={trash} alt="" width="16" height="16" />
+                                            </Button>
+                                        </td>
+                                    </tr>))}
+                            </tbody>
+                        </Table>
                     </Row>
             }
 

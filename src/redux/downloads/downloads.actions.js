@@ -21,7 +21,7 @@ export const getDownloads = (pageNo) => async (dispatch, getState) => {
         dispatch({
           type: GET_DOWNLOADS,
           payload: res.data
-        }, console.log(res.data)))
+        }))
 
   } catch (err) {
     dispatch(returnErrors(err && err.response.data, err && err.response.status, 'GET_DOWNLOADS_FAIL'));

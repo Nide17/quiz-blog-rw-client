@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Row, Col, Card, Button, CardTitle, CardText, TabPane } from 'reactstrap';
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
@@ -6,13 +6,21 @@ import { getContacts, deleteContact } from '../../redux/contacts/contacts.action
 import ReactLoading from "react-loading";
 import DeleteIcon from '../../images/remove.svg';
 import ReplyContactModal from './ReplyContactModal'
+import Pagination from '../webmaster/Pagination'
+import PageOf from '../webmaster/PageOf';
 
 const ContactsTabPane = ({ auth, contacts, getContacts, deleteContact }) => {
 
+    const [pageNo, setPageNo] = useState(1);
+    const [numberOfPages, setNumberOfPages] = useState(0);
+
+    const contactsToUse = contacts && contacts.contacts
+
     // Lifecycle methods
     useEffect(() => {
-        getContacts();
-    }, [getContacts]);
+        getContacts(pageNo)
+        setNumberOfPages(contactsToUse.totalPages)
+    }, [getContacts, pageNo, contactsToUse.totalPages])
 
     return (
         <TabPane tabId="5">
@@ -21,8 +29,9 @@ const ContactsTabPane = ({ auth, contacts, getContacts, deleteContact }) => {
                 <ReactLoading type="spinningBubbles" color="#33FFFC" /> :
 
                 <Row>
-                    {contacts && contacts.contacts.map(contact => (
+                    <PageOf pageNo={pageNo} numberOfPages={numberOfPages} />
 
+                    {contactsToUse && contactsToUse.contacts.map(contact => (
                         <Col sm="6" className="mt-2 contact-card" key={contact._id}>
 
                             <Card body>
@@ -74,6 +83,8 @@ const ContactsTabPane = ({ auth, contacts, getContacts, deleteContact }) => {
                             </Card>
                         </Col>
                     ))}
+
+                    <Pagination pageNo={pageNo} setPageNo={setPageNo} numberOfPages={numberOfPages} />
                 </Row>
             }
 
